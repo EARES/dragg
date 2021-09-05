@@ -38,8 +38,26 @@ console.log(state.list2);
       let data=this.state.list2[index];
       let index2=this.state.list2.findIndex(x=>x.id==payload.second);
       let data2=this.state.list2[index2];
-    commit('setParent',{parentId:data.id,newparentId:data.parentId});
+      if(data.parentId!=null){
+          commit('setParent',{parentId:data.id,newparentId:data.parentId});
 
+      }
+      else {
+          let parentId=data2.parentId;
+          while(true){
+              let topIndex=this.state.list2.findIndex(x=>x.id==parentId);
+              if(topIndex==null||topIndex<0 )
+                  break;
+              let topParent=this.state.list2[topIndex];
+              if(topParent.parentId==null)
+                  break;
+              parentId=topParent.parentId;
+          }
+          if(parentId==data.id){
+              commit('setParent',{parentId:data.id,newparentId:data.parentId});
+
+          }
+      }
 
       commit('set',{id:data.id,data:payload.second});
   }
