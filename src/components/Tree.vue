@@ -1,8 +1,5 @@
 <template>
-
-  <div class="row">
-
-
+<div class="container">
     <table class="table table-hover">
       <thead>
       <tr>
