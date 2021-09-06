@@ -16,6 +16,7 @@ export default new Vuex.Store({
       {'id': 5, 'name': '1',show:false,parentId:4},
       {'id': 6, 'name': '1',show:false,parentId:5},
       {'id': 7, 'name': '1',show:false,parentId:5},
+      {'id': 8, 'name': '1',show:false,parentId:5},
         {'id': 9, 'name': '1',show:false,parentId:5},
         {'id': 10, 'name': '1',show:false,parentId:9},
         {'id':11, 'name': '1',show:false,parentId:10},
