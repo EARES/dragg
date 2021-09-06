@@ -52,6 +52,8 @@ console.log(state.list2);
 
           let parentId=data2.parentId;
           while(true){
+              if(parentId==data.id)
+                  break;
               let topIndex=this.state.list2.findIndex(x=>x.id==parentId);
               if(topIndex==null||topIndex<0 )
                   break;
@@ -59,8 +61,7 @@ console.log(state.list2);
               if(topParent.parentId==null)
                   break;
               parentId=topParent.parentId;
-              if(parentId==data.id)
-                  break;
+
           }
           if(parentId==data.id){
               commit('setParent',{parentId:data.id,newparentId:data.parentId});
