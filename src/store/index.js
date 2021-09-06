@@ -47,6 +47,8 @@ console.log(state.list2);
       let data=this.state.list2[index];
       let index2=this.state.list2.findIndex(x=>x.id==payload.second);
       let data2=this.state.list2[index2];
+    if(data.parentId==data2.id)
+        return;
 
           let parentId=data2.parentId;
           while(true){
