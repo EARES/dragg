@@ -1,6 +1,6 @@
 <template>
 <div class="container">
-    <table class="table table-hover">
+    <table class="table">
       <thead>
       <tr>
         <th class="fit">#</th>

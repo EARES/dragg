@@ -1,19 +1,26 @@
 <template>
+  <div>
+    <div class="list-group-item" v-for="el in this.childrens" :key="el.id">
+      <tr
+        :id="el.id"
+        @dragstart="dragStart"
+        @drop="drop"
+        @dragover="allowDrop"
+        draggable="true"
+      >
+        <td :id="el.id">
+          <i v-if="$store.state.list2.findIndex((x) => x.parentId == el.id) > -1" :class="[el.show ? 'bi bi-dash-circle' : 'bi bi-plus-circle']" :id="el.id" @click="el.show = !el.show"></i>
+        </td>
+        <td :id="el.id"><input type="text" :id="el.id" :value="el.id" /></td>
+      </tr>
 
-<div >
-  <div  class="list-group-item"  v-for="el in this.childrens" :key="el.id" >
-    <div    :id="el.id" @dragstart="dragStart" @drop="drop" @dragover="allowDrop"   draggable="true">
-      <td :id="el.id" ><span :id="el.id"  class="btn btn-primary" @click="el.show = !el.show">Goster</span></td>
-      <td :id="el.id" > <p :id="el.id" >{{   (el.id) }}</p></td>
+      <children4
+        v-show="el.show"
+        :parent-id="(parentId != null ? parentId + '.' : '') + el.id"
+        :childrens="$store.state.list2.filter((x) => x.parentId == el.id)"
+      />
     </div>
-
-
-
-    <children4 v-show="el.show" :parent-id="(parentId!=null ? parentId+'.':'')+ (el.id) " :childrens="$store.state.list2.filter(x=>x.parentId==el.id)" />
   </div>
-</div>
-
-
 </template>
 
 <script>
@@ -30,29 +37,27 @@ export default {
     return {
       enabled: true,
       goster: false,
-      emptyArray:[]
+      emptyArray: [],
     };
   },
 
-  methods:{
-    dragStart:function(event)  {
+  methods: {
+    dragStart: function (event) {
       event.dataTransfer.setData("Text", event.target.id);
     },
-    dragging:function(event) {
-
-    },
-    allowDrop:function(event) {
+    dragging: function (event) {},
+    allowDrop: function (event) {
       event.preventDefault();
     },
-    drop:function(event) {
+    drop: function (event) {
       event.preventDefault();
       var data = event.dataTransfer.getData("Text");
       console.log(data);
       console.log(event.target.id);
-      if(data!=event.target.id)
-       this.$store.dispatch('move',{first:data,second:event.target.id});
-    }
-  }
+      if (data != event.target.id)
+        this.$store.dispatch("move", { first: data, second: event.target.id });
+    },
+  },
 };
 </script>
 <style scoped>
