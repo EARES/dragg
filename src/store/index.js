@@ -7,7 +7,9 @@ export default new Vuex.Store({
   state: {
 
     list2:[
-      {'id': 1, 'name': '1',show:false,parentId:null},
+        {'id': '', 'name': null,show:false,parentId:null},
+
+        {'id': 1, 'name': '1',show:false,parentId:null},
       {'id': 2, 'name': '1',show:false,parentId:1},
       {'id': 3, 'name': '1',show:false,parentId:1},
       {'id': 4, 'name': '1',show:false,parentId:null},
@@ -22,12 +24,17 @@ export default new Vuex.Store({
         {'id': 14, 'name': '1',show:false,parentId:13},
         {'id': 15, 'name': '1',show:false,parentId:14},
         {'id': 16, 'name': '1',show:false,parentId:15},
+        {'id': '', 'name': null,show:false,parentId:null},
 
     ]
   },
   mutations: {
       set (state, payload) {
-         state.list2.filter(x=>x.id==payload.id)[0].parentId=payload.data;
+         state.list2.filter(x=>x.id==payload.id).forEach(x => x.parentId = payload.data==''?null:payload.data ,x=>x.show=true);
+         if(payload.data!=''){
+             state.list2.filter(x=>x.id==payload.data).forEach(x =>x.show=true);
+
+         }
           //state.list2.filter(x=>x.id==payload.id).forEach(x => x.parentId = payload.parentId);
 
 console.log(state.list2);
@@ -37,18 +44,31 @@ console.log(state.list2);
           state.list2.filter(x=>x.parentId==payload.parentId).forEach(x => x.parentId = payload.newparentId);
 
 
+      } ,
+        showAll(state){
+            state.list2.forEach(x => x.show = true);
+        }
+      ,
+      hideAll(state){
+          state.list2.forEach(x => x.show = false);
       }
   },
   actions: {
   move({commit},payload){
    //   debugger;
-      var sstate=this.state.list2;
       let index=this.state.list2.findIndex(x=>x.id==payload.first);
       let data=this.state.list2[index];
+
+      if(payload.second==''){
+          if(data.parentId==null)
+              return;;
+          commit('set',{id:data.id,data:''});
+return;;
+      }
       let index2=this.state.list2.findIndex(x=>x.id==payload.second);
       let data2=this.state.list2[index2];
-    if(data.parentId==data2.id)
-        return;
+      if(data.parentId==data2.id)
+          return;
 
           let parentId=data2.parentId;
           while(true){

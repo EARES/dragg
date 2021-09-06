@@ -1,5 +1,13 @@
 <template>
 <div class="container">
+<div class="row">
+  <div class="col-12 mt-2">
+    <button @click="showAll" v-if="$store.state.list2.filter(x=>x.show==false).length>0" class="btn btn-success">Hepsini Göster</button>
+  </div>
+  <div class="col-12 mt-2">
+    <button @click="hideAll" v-if="$store.state.list2.filter(x=>x.show==true).length>0" class="btn btn-danger">Hepsini Kapat</button>
+  </div>
+</div>
     <table class="table">
       <thead>
       <tr>
@@ -114,7 +122,12 @@ export default {
     }
   },
   methods:{
-
+showAll(){
+  this.$store.commit("showAll");
+},
+    hideAll(){
+      this.$store.commit("hideAll");
+    }
   }
 }
 
