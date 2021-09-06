@@ -9,7 +9,7 @@
 
 
 
-    <children4 v-if="el.show" :parent-id="(parentId!=null ? parentId+'.':'')+ (el.id) " :childrens="$store.state.list2.filter(x=>x.parentId==el.id)" />
+    <children4 v-if="true" :parent-id="(parentId!=null ? parentId+'.':'')+ (el.id) " :childrens="$store.state.list2.filter(x=>x.parentId==el.id)" />
   </div>
 </div>
 

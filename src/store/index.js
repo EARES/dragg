@@ -14,6 +14,15 @@ export default new Vuex.Store({
       {'id': 5, 'name': '1',show:false,parentId:4},
       {'id': 6, 'name': '1',show:false,parentId:5},
       {'id': 7, 'name': '1',show:false,parentId:5},
+        {'id': 9, 'name': '1',show:false,parentId:5},
+        {'id': 10, 'name': '1',show:false,parentId:9},
+        {'id':11, 'name': '1',show:false,parentId:10},
+        {'id': 12, 'name': '1',show:false,parentId:11},
+        {'id': 13, 'name': '1',show:false,parentId:12},
+        {'id': 14, 'name': '1',show:false,parentId:13},
+        {'id': 15, 'name': '1',show:false,parentId:14},
+        {'id': 16, 'name': '1',show:false,parentId:15},
+
     ]
   },
   mutations: {
@@ -38,11 +47,7 @@ console.log(state.list2);
       let data=this.state.list2[index];
       let index2=this.state.list2.findIndex(x=>x.id==payload.second);
       let data2=this.state.list2[index2];
-      if(data.parentId!=null){
-          commit('setParent',{parentId:data.id,newparentId:data.parentId});
 
-      }
-      else {
           let parentId=data2.parentId;
           while(true){
               let topIndex=this.state.list2.findIndex(x=>x.id==parentId);
@@ -52,12 +57,14 @@ console.log(state.list2);
               if(topParent.parentId==null)
                   break;
               parentId=topParent.parentId;
+              if(parentId==data.id)
+                  break;
           }
           if(parentId==data.id){
               commit('setParent',{parentId:data.id,newparentId:data.parentId});
 
           }
-      }
+
 
       commit('set',{id:data.id,data:payload.second});
   }
