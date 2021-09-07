@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="list-group-item" v-for="el in this.childrens" :key="el.id">
+  <div style="margin-left: 2em">
+    <div v-for="el in this.childrens" :key="el.id">
       <tr
         :id="el.id"
         @dragstart="dragStart"
@@ -8,10 +8,13 @@
         @dragover="allowDrop"
         draggable="true"
       >
+        <td>
+          <i class="bi bi-list"></i>
+        </td>
         <td :id="el.id">
           <i v-if="$store.state.list2.findIndex((x) => x.parentId == el.id) > -1" :class="[el.show ? 'bi bi-dash-circle' : 'bi bi-plus-circle']" :id="el.id" @click="el.show = !el.show"></i>
+          <input type="text" :id="el.id" :value="el.id"/>
         </td>
-        <td :id="el.id"><input type="text" :id="el.id" :value="el.id" /></td>
       </tr>
 
       <children4
@@ -24,15 +27,11 @@
 </template>
 
 <script>
-import draggable from "vuedraggable";
 export default {
   name: "Children4",
   display: "Nested",
   order: 15,
   props: ["parentName", "parentId", "childrens"],
-  components: {
-    draggable,
-  },
   data() {
     return {
       enabled: true,
