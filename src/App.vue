@@ -1,10 +1,8 @@
 <template>
-  <!--  <img alt="Vue logo" src="./assets/logo.png">-->
   <Tree/>
 </template>
 
 <script>
-//import Game from "@/components/Game";
 import Tree from "@/components/Tree";
 
 export default {
