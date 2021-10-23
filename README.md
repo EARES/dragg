@@ -1,5 +1,3 @@
-# calisma
-
 ## Project setup
 ```
 npm install
