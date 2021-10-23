@@ -7,7 +7,7 @@
           v-if="$store.state.list2.filter((x) => x.show == false).length > 0"
           class="btn btn-success"
         >
-          Hepsini Göster
+          Show All
         </button>
       </div>
       <div class="col-12 mt-2">
@@ -16,7 +16,7 @@
           v-if="$store.state.list2.filter((x) => x.show == true).length > 0"
           class="btn btn-danger"
         >
-          Hepsini Kapat
+          Hide All
         </button>
       </div>
     </div>
@@ -41,9 +41,6 @@
 </template>
 
 <script>
-//import Children from "@/components/Children";
-//import Children2 from "@/components/Children2";
-//import Children3 from "@/components/Children3";
 import Children4 from "@/components/Children4";
 const table = document.getElementsByTagName("table")[0];
 export default {
