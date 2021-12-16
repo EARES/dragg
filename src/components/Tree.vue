@@ -24,7 +24,7 @@
       <thead>
         <tr>
           <td style="word-break: break-all">#</td>
-          <td style="word-break: break-all">Değer</td>
+          <td style="word-break: break-all">Value</td>
         </tr>
       </thead>
       <tbody>
